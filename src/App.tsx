@@ -31,8 +31,18 @@ function App() {
   return (
     <div className='flex bg-slate-800 h-screen'>
       {/* <Menu /> */}
+      <div className='flex flex-col'>
 
-      <Main hues={hues} addHue = {addNewHue} />
+        <div>
+          <div className='flex flex-row justify-evenly p-4 mb-4 text-center border-b-4'>
+            <h1 className='border-2 rounded-full text-2xl px-6 py-4 bg-white font-bold'>#</h1>
+            <h1 className='text-5xl pt-2 font-bold bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 text-transparent bg-clip-text'>HueGram</h1>
+            <input type='search' placeholder='Search...' className='border-2 rounded-full px-20 py-4'></input>
+          </div>
+        </div>
+
+        <Main hues={hues} addHue = {addNewHue} />
+      </div>
 
       <Profile />
     </div>
