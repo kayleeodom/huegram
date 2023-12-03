@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Hue from './Hue'
 
 interface Props{
-    addHue: (color:string)=> void
+    addHue: (color:string)=> void;
 }
 
 const PostHue = (props:Props) => {

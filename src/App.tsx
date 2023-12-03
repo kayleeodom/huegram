@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react'
 
 function App() {
 
-  const [hues, setHues] = useState([]);
+  const [hues, setHues] = useState<Array<{ id: number; color: string; username: string; likes: number }>>([]);
+
 
   const [currentUser] = useState({
     username: "kavery",
@@ -24,7 +25,7 @@ function App() {
   const addNewHue = (color:string ) => 
   {
       console.log(color)
-      const newHue = {color, username: currentUser.username, id: length+1 , likes:0};
+      const newHue = {color, username: currentUser.username, id: hues.length+1 , likes:0};
       setHues( [newHue, ...hues ] );
   }
 
