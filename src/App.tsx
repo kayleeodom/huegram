@@ -40,6 +40,7 @@ function App() {
             <input type='search' placeholder='Search...' className='border-2 rounded-full px-20 py-4'></input>
           </div>
         </div>
+        
 
         <Main hues={hues} addHue = {addNewHue} />
       </div>

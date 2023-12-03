@@ -5,7 +5,7 @@ const Profile = () => {
     <div className='flex flex-col w-2/5 justify-around border-l-4 p-8 items-center text-white'>
 
         <div className='text-center'>
-          <div className='border-2 p-14'></div>
+          <div className='border-2 p-14'>My Hues</div>
           <h1 className='text-2xl pt-2'>@kodom</h1>
         </div>
 
