@@ -1,11 +1,9 @@
 // import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 // import { faHeart } from "@fortawesome/free-regular-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-interface HueObject {
-  color: string;
-  username: string;
-  likes: number;
-}
+
+import HueObject from "../HueObject";
+
 
 interface Props {
   hue: HueObject;
