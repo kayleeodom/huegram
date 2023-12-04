@@ -1,8 +1,6 @@
 // import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 // import { faHeart } from "@fortawesome/free-regular-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from 'react';
-
 interface HueObject {
   color: string;
   username: string;
