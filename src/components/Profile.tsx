@@ -1,4 +1,6 @@
 // import kaylee from '/kaylee.jpg'
+import { FaHeart } from "react-icons/fa";
+
 
 const Profile = () => {
   return (
@@ -15,7 +17,7 @@ const Profile = () => {
 
         <div className='text-center'>
           <p className='text-6xl'>89</p>
-          <h1 className='text-2xl'>♥ Likes</h1>
+          <h1 className='text-2xl'> <FaHeart /> Likes</h1>
         </div>
 
         <div className='text-center'>

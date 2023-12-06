@@ -33,7 +33,7 @@ function App() {
   return (
     <div className='flex bg-slate-800 h-screen'>
       {/* <Menu /> */}
-      <div className='flex flex-col'>
+      <div className='flex flex-col relative'>
 
         <div>
           <div className='flex flex-row justify-evenly p-4 mb-4 text-center border-b-4'>
@@ -43,11 +43,11 @@ function App() {
           </div>
         </div>
         
-        {/* <div className='flex flex-col'>
+        <div className='flex flex-col'>
           <Main hues={hues} addHue = {addNewHue} />
-        </div> */}
+        </div>
 
-        <Main hues={hues} addHue = {addNewHue} />
+        {/* <Main hues={hues} addHue = {addNewHue} /> */}
       </div>
 
       <Profile />
