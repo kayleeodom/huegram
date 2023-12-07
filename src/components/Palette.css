@@ -1,0 +1,9 @@
+.palette {
+    display: grid;
+    min-width: 100px;
+    width: 150px;
+    height: 150px;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid white;
+}

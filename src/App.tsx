@@ -1,4 +1,4 @@
-//import Menu from './components/Menu'
+import Menu from './components/Menu'
 import Main from './components/Main'
 import Profile from './components/Profile'
 import { useEffect, useState } from 'react'
@@ -30,27 +30,26 @@ function App() {
       setHues( [newHue, ...hues ] );
   }
 
+  const toggleLikeForHue = (id?:number) => 
+  {
+      // generate new array of hues with modified hue
+      const newHues = [...hues]
+      const hue = newHues.find( h => h.id == id )
+      if(hue){
+        hue.isLiked = !hue.isLiked
+        setHues( newHues )
+      }
+  }
+
   return (
-    <div className='flex bg-slate-800 h-screen'>
-      {/* <Menu /> */}
-      <div className='flex flex-col relative'>
+    <div className='flex bg-gradient-to-b from-slate-800 via-slate-900 to-slate-950 h-screen fixed'>
+      <div className='flex flex-col'>
+        <div className='fixed top-0 z-1 w-full'><Menu /></div>
+        <div className=' mt-40 mr-56'><Main hues={hues} addHue = {addNewHue} toggleLike = {toggleLikeForHue}/></div>
 
-        <div>
-          <div className='flex flex-row justify-evenly p-4 mb-4 text-center border-b-4'>
-            <h1 className='border-2 rounded-full text-2xl px-6 py-4 bg-white font-bold'>#</h1>
-            <h1 className='text-5xl pt-2 font-bold bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 text-transparent bg-clip-text'>HueGram</h1>
-            <input type='search' placeholder='Search Hue...' className='border-2 rounded-full px-20 py-4'></input>
-          </div>
-        </div>
-        
-        <div className='flex flex-col'>
-          <Main hues={hues} addHue = {addNewHue} />
-        </div>
-
-        {/* <Main hues={hues} addHue = {addNewHue} /> */}
       </div>
 
-      <Profile />
+      <div className='fixed right-0 pt-12'><Profile /></div>
     </div>
   )
 }
