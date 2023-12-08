@@ -29,14 +29,16 @@ const Hue = ({hue, toggleLike}: Props) => {
 // the individual cards themselves
   return (
     <div
-      className="flex flex-col h-64 aspect-square rounded-3xl text-center justify-between items-center"
+      className="flex flex-col h-64 aspect-square rounded-3xl text-center justify-between"
       style={{ backgroundColor: hue.color, color: text_color }}
     >
-      <div className="flex flex-row ml-16 gap-12 pt-2">
-        <p className={`text-2xl opacity-80 pl-2`}>{hue.color}</p>
-        <button className="text-2xl pl-2" onClick={handleLikeClick}>
+      <div className="pt-2 flex p-3 justify-between">
+        <p className={`text-2xl opacity-80`}>{hue.color}</p>
+        <button className="text-2xl " onClick={handleLikeClick}>
           {isLiked ? <FaHeart/> : <FaRegHeart />}
         </button>
+        {/* <div className="flex right-0">
+        </div> */}
       </div>
 
       {/* <button onClick={ ()=> toggleLike(hue.id)}>Like/Unlike</button> */}
@@ -49,7 +51,7 @@ const Hue = ({hue, toggleLike}: Props) => {
       <div className="bg-black text-white flex  w-full text-center p-4 justify-between rounded-b-2xl">
         <p className="text-xl">{hue.username}</p>
         <div className="flex flex-row">
-          <p className="text-xl pr-2">45</p>
+          <p id="postLikes" className="text-xl pr-2">0</p>
           <div className="pt-2"><FaHeart /></div>
         </div>
       </div>
