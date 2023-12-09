@@ -21,6 +21,7 @@ function App() {
     .then(data => setCurrentUser(data))
   }, [])
 
+
   useEffect( ()=>
   {
     fetch('./hues.json')
@@ -32,7 +33,7 @@ function App() {
   {
       // console.log(color)
       const currentUserObject = currentUser!
-      const newHue = {color, username: currentUserObject.username, id: hues.length+1 , likes:0, isLiked:false};
+      const newHue = {color, username: currentUserObject.username, id: hues.length+1 , likes:0, isLiked:true};
       //updates
       const updatedUser = {
         ...currentUserObject,
@@ -70,7 +71,7 @@ function App() {
 
       </div>
 
-      <div className='fixed right-0 pt-12'><Profile currentUser={currentUser}/></div>
+      <div className='fixed right-0 pt-12'><Profile currentUser={currentUser} /></div>
     </div>
   )
 }

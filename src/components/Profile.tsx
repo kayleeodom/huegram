@@ -4,7 +4,9 @@ import { FaHashtag } from "react-icons/fa";
 import './Palette.css'
 import UserObject from "../UserObject";
 
-
+// interface ProofileProps {
+//   currentUser: UserObject;
+// }
 
 const Profile = ({currentUser}: {currentUser: UserObject}) => {
   if (!currentUser) {
@@ -40,8 +42,8 @@ const Profile = ({currentUser}: {currentUser: UserObject}) => {
       <div className='text-center items-center'>
         <p className='text-6xl'>{currentUser.hues.length}</p>
         <div className="flex flex-row items-center gap-2">
-        <div className="pt-1 text-2xl"><FaHashtag /></div>
-          <h1 className='text-3xl'>Hues</h1>
+          <div className="pt-1 text-2xl"><FaHashtag /></div>
+          <h1 className='text-3xl'>hues</h1>
         </div>
       </div>
 
