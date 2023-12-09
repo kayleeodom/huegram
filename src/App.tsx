@@ -3,30 +3,50 @@ import Main from './components/Main'
 import Profile from './components/Profile'
 import { useEffect, useState } from 'react'
 import HueObject from './HueObject';
+import UserObject from './UserObject';
 
 function App() {
 
   const [hues, setHues] = useState<HueObject[]>([]);
+  const [currentUser, setCurrentUser] = useState<UserObject>({
+    username:'',
+    likes:0,
+    hues: [],
+  })
 
+  // const [currentUser] = useState({
+  //   username: "kodom",
+  //   likes: 58,
+  //   hues: [ {id:36, color:'#ffa510', username:"kavery", likes: 15}]
+  // });
 
-  const [currentUser] = useState({
-    username: "kavery",
-    likes: 58,
-    hues: [ {id:36, color:'#ffa510', username:"kavery", likes: 15}]
-  });
+  useEffect( ()=>
+  {
+    fetch('./user.json')
+    .then(res => res.json() )
+    .then(data => setCurrentUser(data))
+  }, [])
 
 
   useEffect( ()=>
   {
-    fetch('./sampleData.json')
+    fetch('./hues.json')
     .then( res => res.json() )
     .then( data => setHues(data) ) 
   }, [])
 
   const addNewHue = (color:string ) => 
   {
-      console.log(color)
-      const newHue = {color, username: currentUser.username, id: hues.length+1 , likes:0, isLiked:false};
+      // console.log(color)
+      const currentUserObject = currentUser!
+      const newHue = {color, username: currentUserObject.username, id: hues.length+1 , likes:0, isLiked:false};
+      //updates
+      const updatedUser = {
+        ...currentUserObject,
+        hues: [...currentUserObject.hues, newHue]
+      }
+      // const newHue = {color, username: currentUserObject.username, id: hues.length+1 , likes:0, isLiked:false};
+      setCurrentUser(updatedUser)
       setHues( [newHue, ...hues ] );
   }
 
@@ -49,9 +69,10 @@ function App() {
 
       </div>
 
-      <div className='fixed right-0 pt-12'><Profile /></div>
+      <div className='fixed right-0 pt-12'><Profile currentUser={currentUser} /></div>
     </div>
   )
 }
 
 export default App
+

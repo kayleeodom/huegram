@@ -1,3 +1,4 @@
+// import { useEffect, useState } from 'react'
 import HueObject from '../HueObject'
 import Hue from './Hue'
 import PostHue from './PostHue'
@@ -10,6 +11,12 @@ interface Props {
 }
 
 const Main = ({hues, addHue, toggleLike} : Props) => {
+  // const [filteredHues, setFilteredHues] = useState<HueObject[]>(hues)
+
+  // useEffect(() => {
+  //   setFilteredHues(hues)
+  // }, [hues])
+
   return (
     <div className='flex flex-row'>
       <div className='mt-[2rem] ml-14 fixed left-0'>
