@@ -3,6 +3,6 @@
     {"id": 2, "color": "#ff8c00", "username": "therealkaylee", "likes": 8, "isLiked":false },
     {"id": 3, "color": "#ff7f50", "username": "odomester", "likes": 20, "isLiked":false},
     {"id": 4, "color": "#ff6347", "username": "abbieV", "likes": 200, "isLiked":false},
-    {"id": 5, "color": "#ff6857", "username": "kodom302", "likes": 13, "isLiked":false},
-    {"id": 6, "color": "#ff9988", "username": "kodom302", "likes": 14, "isLiked":false} 
+    {"id": 5, "color": "#ff6857", "username": "kodom", "likes": 40, "isLiked":false},
+    {"id": 6, "color": "#ff9988", "username": "kodom", "likes": 29, "isLiked":false} 
 ]

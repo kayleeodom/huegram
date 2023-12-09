@@ -5,11 +5,12 @@ import { useState } from "react";
 
 
 interface Props {
-  hue: HueObject,
-  toggleLike?: (id?:number) => void
+  hue: HueObject;
+  toggleLike?: (id?:number) => void;
+  updateLikes?: (isLiked:boolean) => void;
 }
 
-const Hue = ({hue, toggleLike}: Props) => {
+const Hue = ({hue, toggleLike, updateLikes}: Props) => {
 
   const r_num = Number("0x" + hue.color.slice(1, 3));
   const g_num = Number("0x" + hue.color.slice(3, 5));
@@ -22,8 +23,12 @@ const Hue = ({hue, toggleLike}: Props) => {
   const [isLiked, setIsLiked] = useState(hue.isLiked);
 
   const handleLikeClick = () => {
-    toggleLike && toggleLike(hue.id)
-    setIsLiked(!isLiked);
+    if (hue.likes > 0)
+    {
+      toggleLike && toggleLike(hue.id)
+      setIsLiked(!isLiked);
+      updateLikes && updateLikes(!isLiked)
+    }
   }
   
 // the individual cards themselves
@@ -51,7 +56,7 @@ const Hue = ({hue, toggleLike}: Props) => {
       <div className="bg-black text-white flex  w-full text-center p-4 justify-between rounded-b-2xl">
         <p className="text-xl">{hue.username}</p>
         <div className="flex flex-row">
-          <p id="postLikes" className="text-xl pr-2">0</p>
+          <p id="postLikes" className="text-xl pr-2">{hue.likes}</p>
           <div className="pt-2"><FaHeart /></div>
         </div>
       </div>

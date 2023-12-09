@@ -5,12 +5,13 @@ import PostHue from './PostHue'
 
 
 interface Props {
-    hues: HueObject[],
-    addHue: (color:string) => void,
-    toggleLike?: (id?:number) => void
+    hues: HueObject[];
+    addHue: (color:string) => void;
+    toggleLike?: (id?:number) => void;
+    updateLikes?: (isLiked: boolean) => void;
 }
 
-const Main = ({hues, addHue, toggleLike} : Props) => {
+const Main = ({hues, addHue, toggleLike, updateLikes} : Props) => {
   // const [filteredHues, setFilteredHues] = useState<HueObject[]>(hues)
 
   // useEffect(() => {
@@ -25,7 +26,7 @@ const Main = ({hues, addHue, toggleLike} : Props) => {
 
       <div className='flex flex-row ml-96 relative h-[36rem] flex-wrap max-w-screen-2xl justify-evenly p-8 gap-8 overflow-y-auto'>
         {hues.map( (hue) => (  
-            <Hue hue={hue} toggleLike={toggleLike}/>
+            <Hue hue={hue} toggleLike={toggleLike} updateLikes={updateLikes}/>
         ))}
       </div>
 

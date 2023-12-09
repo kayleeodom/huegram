@@ -14,12 +14,6 @@ function App() {
     hues: [],
   })
 
-  // const [currentUser] = useState({
-  //   username: "kodom",
-  //   likes: 58,
-  //   hues: [ {id:36, color:'#ffa510', username:"kavery", likes: 15}]
-  // });
-
   useEffect( ()=>
   {
     fetch('./user.json')
@@ -39,7 +33,7 @@ function App() {
   {
       // console.log(color)
       const currentUserObject = currentUser!
-      const newHue = {color, username: currentUserObject.username, id: hues.length+1 , likes:0, isLiked:false};
+      const newHue = {color, username: currentUserObject.username, id: hues.length+1 , likes:0, isLiked:true};
       //updates
       const updatedUser = {
         ...currentUserObject,
@@ -54,18 +48,26 @@ function App() {
   {
       // generate new array of hues with modified hue
       const newHues = [...hues]
-      const hue = newHues.find( h => h.id == id )
+      const hue = newHues.find((h) => h.id == id )
       if(hue){
         hue.isLiked = !hue.isLiked
         setHues( newHues )
+        updateLikes(hue.isLiked)
       }
+  }
+
+  const updateLikes = (isLiked: boolean) => {
+    const increment = isLiked ? 1 : -1;
+    const updateLikes = hues.reduce((totalLikes, hue) => totalLikes + (hue.username === "kodom" && hue.isLiked ? increment : 0), currentUser.likes)
+    const updatedUser = {...currentUser, likes: updateLikes}
+    setCurrentUser(updatedUser)
   }
 
   return (
     <div className='flex bg-gradient-to-b from-slate-800 via-slate-900 to-slate-950 h-screen fixed'>
       <div className='flex flex-col'>
         <div className='fixed top-0 z-1 w-full'><Menu /></div>
-        <div className=' mt-40 mr-56'><Main hues={hues} addHue = {addNewHue} toggleLike = {toggleLikeForHue}/></div>
+        <div className=' mt-40 mr-56'><Main hues={hues} addHue = {addNewHue} toggleLike = {toggleLikeForHue} updateLikes={updateLikes}/></div>
 
       </div>
 
