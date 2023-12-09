@@ -1,4 +1,3 @@
-// import { useEffect, useState } from 'react'
 import HueObject from '../HueObject'
 import Hue from './Hue'
 import PostHue from './PostHue'

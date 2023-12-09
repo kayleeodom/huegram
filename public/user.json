@@ -1,9 +1,0 @@
-{
-    "username": "kodom",
-    "likes": 69,
-    "hues": 
-    [
-        {"id": 5, "color": "#ff6747", "username": "kodom", "likes": 40, "isLiked":false},
-        {"id": 6, "color": "#ff6747", "username": "kodom", "likes": 29, "isLiked":false} 
-    ]
-}
