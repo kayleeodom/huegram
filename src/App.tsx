@@ -1,7 +1,7 @@
 import Menu from './components/Menu'
 import Main from './components/Main'
 import Profile from './components/Profile'
-import { useEffect, useState } from 'react'
+import { SetStateAction, useEffect, useState } from 'react'
 import HueObject from './HueObject';
 import UserObject from './UserObject';
 
@@ -97,21 +97,37 @@ const updateLikesForHue = (isLiked: boolean, id?: number) => {
     return hue;
   });
 
-  updateLikesForCurrentUser(isLiked);
+  // Check if the post with username 'kodom' is being liked
+  const isLikedByKodom = updatedHues.find((hue) => hue.id === id && hue.username === 'kodom' && hue.isLiked);
+
+  // Update likes for the current user only if it's a post by 'kodom'
+  if (isLikedByKodom) {
+    updateLikesForCurrentUser(isLiked);
+  }
 
   setHues(updatedHues);
 };
 
 
+// Search Section
+const [searchText, setSearchText] = useState('');
+
+// Filter hues based on the search text
+const filteredHues = hues.filter((hue) =>
+  hue.color.toLowerCase().includes(searchText.toLowerCase())
+);
+
+
+
   return (
     <div className='flex bg-gradient-to-b from-slate-800 via-slate-900 to-slate-950 h-screen fixed'>
       <div className='flex flex-col'>
-        <div className='fixed top-0 z-1 w-full'><Menu/></div>
-        <div className=' mt-40 mr-56'><Main hues={hues} addHue = {addNewHue} toggleLike = {toggleLikeForHue} likeHue={likeHue} unlikeHue={unlikeHue}/></div>
+        <div className='fixed top-0 z-1 w-full'><Menu onSearchChange={(text: SetStateAction<string>) => setSearchText(text)}/></div>
+        <div className=' mt-40 mr-56'><Main hues={filteredHues} addHue = {addNewHue} toggleLike = {toggleLikeForHue} likeHue={likeHue} unlikeHue={unlikeHue}/></div>
 
       </div>
 
-      <div className='fixed right-0 pt-12'><Profile currentUser={currentUser} /></div>
+      <div className='fixed right-0 pt-12'><Profile currentUser={currentUser} addNewHue={addNewHue} /></div>
     </div>
   )
 }

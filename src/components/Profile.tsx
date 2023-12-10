@@ -4,8 +4,9 @@ import { FaHashtag } from "react-icons/fa";
 import './Palette.css'
 import UserObject from "../UserObject";
 
-// interface ProofileProps {
+// interface ProfileProps {
 //   currentUser: UserObject;
+//   addNewHue: (color: string) => void;
 // }
 
 const Profile = ({currentUser}: {currentUser: UserObject}) => {
@@ -13,21 +14,20 @@ const Profile = ({currentUser}: {currentUser: UserObject}) => {
     return <p>Loading...</p>
   }
 
+  const renderPalette = () => {
+    return (
+      <div className="palette">
+        {currentUser.hues.map((hue, index) => (
+          <div key={index} style={{ backgroundColor: hue.color }}></div>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <div className='flex flex-col w-2/5 justify-evenly items-center text-white h-screen'>
-
       <div className='text-center items-center'>
-        <div className="palette">
-          <div style={{ backgroundColor: '#ff2299'}}></div>
-          <div style={{ backgroundColor: '#ff2359'}}></div>
-          <div style={{ backgroundColor: '#ff2789'}}></div>
-          <div style={{ backgroundColor: '#ff2339'}}></div>
-          <div style={{ backgroundColor: '#ff2689'}}></div>
-          <div style={{ backgroundColor: '#ff3389'}}></div>
-          <div style={{ backgroundColor: '#ff2385'}}></div>
-          <div style={{ backgroundColor: '#ff6987'}}></div>
-          <div style={{ backgroundColor: '#ff8887'}}></div>
-        </div>
+        {renderPalette()}
         <h1 className='text-2xl pt-2'>@{currentUser.username}</h1>
       </div>
 
@@ -46,7 +46,6 @@ const Profile = ({currentUser}: {currentUser: UserObject}) => {
           <h1 className='text-3xl'>hues</h1>
         </div>
       </div>
-
     </div>
   )
 }
