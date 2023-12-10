@@ -1,17 +1,20 @@
 // import { useEffect, useState } from 'react'
+import { useState } from 'react';
 import HueObject from '../HueObject'
 import Hue from './Hue'
 import PostHue from './PostHue'
 
 
 interface Props {
-    hues: HueObject[];
-    addHue: (color:string) => void;
-    toggleLike?: (id?:number) => void;
-    updateLikes?: (isLiked: boolean) => void;
+  hues: HueObject[];
+  addHue: (color:string) => void;
+  toggleLike?: (id?:number) => void;
+  likeHue: (id?: number) => void;
+  unlikeHue: (id?: number) => void;
 }
 
-const Main = ({hues, addHue, toggleLike, updateLikes} : Props) => {
+const Main = ({hues, addHue, toggleLike, likeHue, unlikeHue} : Props) => {
+  const [isLiked, setIsLiked] = useState(false)
   // const [filteredHues, setFilteredHues] = useState<HueObject[]>(hues)
 
   // useEffect(() => {
@@ -21,12 +24,12 @@ const Main = ({hues, addHue, toggleLike, updateLikes} : Props) => {
   return (
     <div className='flex flex-row'>
       <div className='mt-[2rem] ml-14 fixed left-0'>
-        <PostHue addHue={addHue}/>
+        <PostHue addHue={addHue} toggleLike={toggleLike} setIsLiked={setIsLiked} isLiked={isLiked}/>
       </div>
 
       <div className='flex flex-row ml-96 relative h-[36rem] flex-wrap max-w-screen-2xl justify-evenly p-8 gap-8 overflow-y-auto'>
         {hues.map( (hue) => (  
-            <Hue hue={hue} toggleLike={toggleLike} updateLikes={updateLikes}/>
+            <Hue hue={hue} toggleLike={toggleLike} likeHue={likeHue} unlikeHue={unlikeHue} isLiked={isLiked}/>
         ))}
       </div>
 

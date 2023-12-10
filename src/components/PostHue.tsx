@@ -6,6 +6,8 @@ import Hue from './Hue'
 interface Props{
     addHue: (color:string)=> void;
     toggleLike?: () => void;
+    setIsLiked: React.Dispatch<React.SetStateAction<boolean>>;
+    isLiked: boolean
 }
 
 const PostHue = (props:Props) => {
@@ -28,15 +30,24 @@ const PostHue = (props:Props) => {
       }
     }
 
+    const handlePostClick = () => {
+      props.addHue(color);
+      if (props.toggleLike) {
+        props.toggleLike();
+      }
+      // Use the provided isLiked prop if available, otherwise default to true
+      props.setIsLiked(props.isLiked !== undefined ? props.isLiked : true);
+    };
+
   return (
     <div className='flex flex-col w-fit h-fit p-6 justify-evenly gap-8 border-2 rounded-2xl'>
 
         <div className='flex flex-col w-full p-4 gap-4' style={{backgroundColor: color}}>
             <input type="text" className='rounded p-2' name="hue" id="hue" maxLength={maxLength} value={color} onChange={handleChange}/>
-            <a href="#" onClick={ () => props.addHue(color)  } className="btn bg-white text-cyan-950 p-2 rounded text-center">Post</a>
+            <a href="#" onClick={handlePostClick} className="btn bg-white text-cyan-950 p-2 rounded text-center">Post</a>
         </div>
 
-        <div><Hue hue={{ color, username: "kodom", likes: 0, isLiked: false, id: 0 }}/></div>
+        <div><Hue hue={{ color, username: "kodom", likes: 0, isLiked: false, id: 0}} isLiked={props.isLiked} toggleLike={props.toggleLike}/></div>
 
     </div>
   )

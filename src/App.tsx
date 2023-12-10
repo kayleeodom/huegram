@@ -44,30 +44,70 @@ function App() {
       setHues( [newHue, ...hues ] );
   }
 
-  const toggleLikeForHue = (id?:number) => 
-  {
-      // generate new array of hues with modified hue
-      const newHues = [...hues]
-      const hue = newHues.find((h) => h.id == id )
-      if(hue){
-        hue.isLiked = !hue.isLiked
-        setHues( newHues )
-        updateLikes(hue.isLiked)
+  const toggleLikeForHue = (id?: number) => {
+    const hue = hues.find((h) => h.id === id);
+
+    if (hue) {
+      if (hue.isLiked) {
+        unlikeHue(id);
+      } else {
+        likeHue(id);
       }
+    }
   }
 
-  const updateLikes = (isLiked: boolean) => {
-    const increment = isLiked ? 1 : -1;
-    const updateLikes = hues.reduce((totalLikes, hue) => totalLikes + (hue.username === "kodom" && hue.isLiked ? increment : 0), currentUser.likes)
-    const updatedUser = {...currentUser, likes: updateLikes}
-    setCurrentUser(updatedUser)
+  const likeHue = (id?: number) => {
+    updateLikesForHue(true, id);
+  };
+  
+  const unlikeHue = (id?: number) => {
+    updateLikesForHue(false, id);
+  };
+  
+// Function to update the likes for a specific hue
+const updateLikesForSingleHue = (isLiked: boolean, hue: HueObject) => {
+  if (hue.isLiked !== isLiked) {
+    return {
+      ...hue,
+      likes: isLiked ? hue.likes + 1 : Math.max(0, hue.likes - 1),
+      isLiked: isLiked,
+    };
   }
+  return hue;
+};
+
+// Function to update likes for the current user
+const updateLikesForCurrentUser = (isLiked: boolean) => {
+  const increment = isLiked ? 1 : -1;
+
+  const updatedUser = {
+    ...currentUser,
+    likes: currentUser.likes + increment,
+  };
+
+  setCurrentUser(updatedUser);
+};
+
+// Combined function to update likes for a specific hue and the current user
+const updateLikesForHue = (isLiked: boolean, id?: number) => {
+  const updatedHues = hues.map((hue) => {
+    if (hue.id === id && hue.username === currentUser.username) {
+      return updateLikesForSingleHue(isLiked, hue);
+    }
+    return hue;
+  });
+
+  updateLikesForCurrentUser(isLiked);
+
+  setHues(updatedHues);
+};
+
 
   return (
     <div className='flex bg-gradient-to-b from-slate-800 via-slate-900 to-slate-950 h-screen fixed'>
       <div className='flex flex-col'>
-        <div className='fixed top-0 z-1 w-full'><Menu /></div>
-        <div className=' mt-40 mr-56'><Main hues={hues} addHue = {addNewHue} toggleLike = {toggleLikeForHue} updateLikes={updateLikes}/></div>
+        <div className='fixed top-0 z-1 w-full'><Menu/></div>
+        <div className=' mt-40 mr-56'><Main hues={hues} addHue = {addNewHue} toggleLike = {toggleLikeForHue} likeHue={likeHue} unlikeHue={unlikeHue}/></div>
 
       </div>
 

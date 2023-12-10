@@ -7,10 +7,12 @@ import { useState } from "react";
 interface Props {
   hue: HueObject;
   toggleLike?: (id?:number) => void;
-  updateLikes?: (isLiked:boolean) => void;
+  likeHue?: (id?: number) => void;  // Add this line
+  unlikeHue?: (id?: number) => void; 
+  isLiked: boolean
 }
 
-const Hue = ({hue, toggleLike, updateLikes}: Props) => {
+const Hue = ({hue, toggleLike, likeHue, unlikeHue }: Props) => {
 
   const r_num = Number("0x" + hue.color.slice(1, 3));
   const g_num = Number("0x" + hue.color.slice(3, 5));
@@ -23,13 +25,17 @@ const Hue = ({hue, toggleLike, updateLikes}: Props) => {
   const [isLiked, setIsLiked] = useState(hue.isLiked);
 
   const handleLikeClick = () => {
-    if (hue.likes > 0)
-    {
-      toggleLike && toggleLike(hue.id)
-      setIsLiked(!isLiked);
-      updateLikes && updateLikes(!isLiked)
+    if (hue.likes >= 0) {
+      if (hue.isLiked) {
+        unlikeHue && unlikeHue(hue.id);
+      } else {
+        likeHue && likeHue(hue.id);
+      }
+
+      toggleLike && toggleLike(hue.id);
+      setIsLiked(!isLiked)
     }
-  }
+  };
   
 // the individual cards themselves
   return (
@@ -56,7 +62,7 @@ const Hue = ({hue, toggleLike, updateLikes}: Props) => {
       <div className="bg-black text-white flex  w-full text-center p-4 justify-between rounded-b-2xl">
         <p className="text-xl">{hue.username}</p>
         <div className="flex flex-row">
-          <p id="postLikes" className="text-xl pr-2">{hue.likes}</p>
+          <p id="postLikes" className="text-xl pr-2">{isLiked ? hue.likes + 1 : hue.likes}</p>
           <div className="pt-2"><FaHeart /></div>
         </div>
       </div>
