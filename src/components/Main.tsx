@@ -32,19 +32,12 @@ const Main = ({ hues, addHue, toggleLike, likeHue, unlikeHue }: Props) => {
       </div>
 
       <div className='flex flex-row ml-96 relative h-[36rem] flex-wrap max-w-screen-2xl justify-evenly p-8 gap-8 overflow-y-auto'>
-        {[
-          ...filteredHues
-            .filter((hue) => hue.color.toLowerCase().includes(searchText.toLowerCase()))
-            .map((hue) => (
-              <Hue key={hue.id} hue={hue} toggleLike={toggleLike} likeHue={likeHue} unlikeHue={unlikeHue} isLiked={isLiked} />
-            )),
-          ...filteredHues
-            .filter((hue) => !hue.color.toLowerCase().includes(searchText.toLowerCase()))
-            .map((hue) => (
-              <Hue key={hue.id} hue={hue} toggleLike={toggleLike} likeHue={likeHue} unlikeHue={unlikeHue} isLiked={isLiked} />
-            )),
-        ]}
+        {filteredHues.map( (hue) => (  
+            <Hue hue={hue} toggleLike={toggleLike} likeHue={likeHue} unlikeHue={unlikeHue} isLiked={isLiked}/>
+        ))}
       </div>
+
+      
 
     </div>
   )

@@ -67,12 +67,17 @@ function App() {
 // Function to update the likes for a specific hue
 const updateLikesForSingleHue = (isLiked: boolean, hue: HueObject) => {
   if (hue.isLiked !== isLiked) {
-    return {
+    const updatedHue = {
       ...hue,
-      likes: isLiked ? hue.likes + 1 : Math.max(0, hue.likes - 1),
+      likes: isLiked ? hue.likes : Math.max(0, hue.likes),
       isLiked: isLiked,
     };
+
+    
+
+    return updatedHue;
   }
+
   return hue;
 };
 
@@ -102,10 +107,6 @@ const updateLikesForHue = (isLiked: boolean, id?: number) => {
 };
 
 
-
-
-
-
 // Search Section
 const [searchText, setSearchText] = useState('');
 
@@ -120,7 +121,7 @@ const filteredHues = hues.filter((hue) =>
     <div className='flex bg-gradient-to-b from-slate-800 via-slate-900 to-slate-950 h-screen fixed'>
       <div className='flex flex-col'>
         <div className='fixed top-0 z-1 w-full'><Menu onSearchChange={(text: SetStateAction<string>) => setSearchText(text)}/></div>
-        <div className=' mt-40 mr-56'><Main hues={filteredHues} addHue = {addNewHue} toggleLike = {toggleLikeForHue} likeHue={likeHue} unlikeHue={unlikeHue}/></div>
+        <div className=' mt-40 mr-56 w-fit'><Main hues={filteredHues} addHue = {addNewHue} toggleLike = {toggleLikeForHue} likeHue={likeHue} unlikeHue={unlikeHue}/></div>
 
       </div>
 
