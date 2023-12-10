@@ -127,7 +127,7 @@ const filteredHues = hues.filter((hue) =>
 
       </div>
 
-      <div className='fixed right-0 pt-12'><Profile currentUser={currentUser} addNewHue={addNewHue} /></div>
+      <div className='fixed right-0 pt-12'><Profile currentUser={currentUser}/></div>
     </div>
   )
 }
