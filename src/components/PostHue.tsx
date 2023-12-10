@@ -40,7 +40,7 @@ const PostHue = (props:Props) => {
     };
 
   return (
-    <div className='flex flex-col w-fit h-fit p-6 justify-evenly gap-8 border-2 rounded-2xl'>
+    <div className='flex flex-col h-fit p-6 justify-evenly gap-8 border-2 rounded-2xl'>
 
         <div className='flex flex-col w-full p-4 gap-4' style={{backgroundColor: color}}>
             <input type="text" className='rounded p-2' name="hue" id="hue" maxLength={maxLength} value={color} onChange={handleChange}/>

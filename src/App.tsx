@@ -73,8 +73,6 @@ const updateLikesForSingleHue = (isLiked: boolean, hue: HueObject) => {
       isLiked: isLiked,
     };
 
-    
-
     return updatedHue;
   }
 
@@ -115,17 +113,15 @@ const filteredHues = hues.filter((hue) =>
   hue.color.toLowerCase().includes(searchText.toLowerCase())
 );
 
-
-
   return (
     <div className='flex bg-gradient-to-b from-slate-800 via-slate-900 to-slate-950 h-screen fixed'>
       <div className='flex flex-col'>
         <div className='fixed top-0 z-1 w-full'><Menu onSearchChange={(text: SetStateAction<string>) => setSearchText(text)}/></div>
-        <div className=' mt-40 mr-56 w-fit'><Main hues={filteredHues} addHue = {addNewHue} toggleLike = {toggleLikeForHue} likeHue={likeHue} unlikeHue={unlikeHue}/></div>
+        <div className=' mt-40 mr-24'><Main hues={filteredHues} addHue = {addNewHue} toggleLike = {toggleLikeForHue} likeHue={likeHue} unlikeHue={unlikeHue}/></div>
 
       </div>
 
-      <div className='fixed right-0 pt-12'><Profile currentUser={currentUser}/></div>
+      <div className='static right-0 pr-20 pt-12'><Profile currentUser={currentUser}/></div>
     </div>
   )
 }

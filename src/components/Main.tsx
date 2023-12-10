@@ -26,8 +26,8 @@ const Main = ({ hues, addHue, toggleLike, likeHue, unlikeHue }: Props) => {
   }, [hues, searchText]);
 
   return (
-    <div className='flex flex-row'>
-      <div className='mt-[2rem] ml-14 fixed left-0'>
+    <div className='flex flex-row w-full'>
+      <div className='mt-[2rem] ml-14 w-fit fixed left-0'>
         <PostHue addHue={addHue} toggleLike={toggleLike} setIsLiked={setIsLiked} isLiked={isLiked}/>
       </div>
 

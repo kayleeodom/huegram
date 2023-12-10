@@ -25,7 +25,7 @@ const Profile = ({currentUser}: {currentUser: UserObject}) => {
   };
 
   return (
-    <div className='flex flex-col w-2/5 justify-evenly items-center text-white h-screen'>
+    <div className='flex flex-col w-35% justify-evenly items-center text-white h-screen'>
       <div className='text-center items-center'>
         {renderPalette()}
         <h1 className='text-2xl pt-2'>@{currentUser.username}</h1>
