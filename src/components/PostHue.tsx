@@ -36,7 +36,7 @@ const PostHue = (props:Props) => {
         props.toggleLike();
       }
       // Use the provided isLiked prop if available, otherwise default to true
-      props.setIsLiked(props.isLiked !== undefined ? props.isLiked : true);
+      props.setIsLiked(props.isLiked !== undefined ? props.isLiked : false);
     };
 
   return (

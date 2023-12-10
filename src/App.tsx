@@ -33,7 +33,7 @@ function App() {
   {
       // console.log(color)
       const currentUserObject = currentUser!
-      const newHue = {color, username: currentUserObject.username, id: hues.length+1 , likes:0, isLiked:true};
+      const newHue = {color, username: currentUserObject.username, id: hues.length+1 , likes:0, isLiked:false};
       //updates
       const updatedUser = {
         ...currentUserObject,
