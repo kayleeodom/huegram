@@ -76,37 +76,34 @@ const updateLikesForSingleHue = (isLiked: boolean, hue: HueObject) => {
   return hue;
 };
 
-// Function to update likes for the current user
-const updateLikesForCurrentUser = (isLiked: boolean) => {
-  const increment = isLiked ? 1 : -1;
-
-  const updatedUser = {
-    ...currentUser,
-    likes: currentUser.likes + increment,
-  };
-
-  setCurrentUser(updatedUser);
-};
-
-// Combined function to update likes for a specific hue and the current user
 const updateLikesForHue = (isLiked: boolean, id?: number) => {
-  const updatedHues = hues.map((hue) => {
-    if (hue.id === id && hue.username === currentUser.username) {
-      return updateLikesForSingleHue(isLiked, hue);
-    }
-    return hue;
+  let currentUserUpdated = false;
+
+  setHues((prevHues) => {
+    return prevHues.map((hue) => {
+      if (hue.id === id && hue.username === currentUser.username) {
+        const updatedHue = updateLikesForSingleHue(isLiked, hue);
+
+        // Check if the post with username 'kodom' is being liked
+        if (updatedHue.username === 'kodom' && updatedHue.isLiked !== hue.isLiked && !currentUserUpdated) {
+          // Update likes for the current user only if it's a post by 'kodom'
+          setCurrentUser((prevUser) => ({
+            ...prevUser,
+            likes: prevUser.likes + (isLiked ? 1 : -1),
+          }));
+          currentUserUpdated = true;
+        }
+
+        return updatedHue;
+      }
+      return hue;
+    });
   });
-
-  // Check if the post with username 'kodom' is being liked
-  const isLikedByKodom = updatedHues.find((hue) => hue.id === id && hue.username === 'kodom' && hue.isLiked);
-
-  // Update likes for the current user only if it's a post by 'kodom'
-  if (isLikedByKodom) {
-    updateLikesForCurrentUser(isLiked);
-  }
-
-  setHues(updatedHues);
 };
+
+
+
+
 
 
 // Search Section
